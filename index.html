@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 · Not The Impostor</title>
+<meta name="description" content="Trang bạn tìm was not The Impostor. 1 Impostor remains.">
+<meta property="og:title" content="404 · Trang này was not The Impostor">
+<meta property="og:description" content="1 Impostor remains. Và trông bạn khá sus.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'%3E%3Cg stroke='%23000' stroke-width='5' stroke-linejoin='round'%3E%3Crect x='8' y='42' width='22' height='44' rx='9' fill='%237a0838'/%3E%3Cpath d='M24 40C24 14 38 4 56 4C76 4 88 18 88 40V96C88 105 83 110 75 110H67C62 110 60 106 60 100V92H52V100C52 106 49 110 44 110H33C27 110 24 105 24 98Z' fill='%23c51111'/%3E%3Crect x='46' y='20' width='48' height='28' rx='14' fill='%2395cadc'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: #000;
+    color: #fff;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button { font: inherit; }
+  .heavy { font-family: "Arial Black", "Segoe UI Black", Impact, system-ui, sans-serif; }
+
+  #stars { position: fixed; inset: 0; z-index: 0; display: block; }
+
+  /* ---------- main ---------- */
+  #main {
+    position: relative; z-index: 1;
+    min-height: 100vh; min-height: 100svh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 64px 16px 120px; text-align: center; gap: 14px;
+    transition: opacity .5s;
+  }
+  body.ejecting #main, body.ejecting .vent { opacity: 0; pointer-events: none; }
+
+  .code404 {
+    position: relative;
+    display: flex; align-items: center; justify-content: center; gap: .04em;
+    font-size: clamp(96px, 26vw, 220px); line-height: 1; font-weight: 900;
+    text-shadow: 0 .04em 0 #5a0a0a, 0 0 .2em rgba(255,255,255,.18);
+    user-select: none;
+  }
+  .big-bean {
+    width: .62em; height: .78em; padding: 0; border: 0; background: none; cursor: pointer;
+    animation: bob 3.2s ease-in-out infinite;
+  }
+  .big-bean svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 .03em 0 rgba(0,0,0,.6)); }
+  .big-bean.hop svg { animation: hop .3s ease-out; }
+  .big-bean.impostor svg { filter: drop-shadow(0 0 .08em #ff1a1a); animation: shake .12s linear infinite; }
+  .big-bean:focus-visible { outline: 3px solid #fff; outline-offset: 6px; border-radius: 12px; }
+
+  .bubble {
+    position: absolute; left: 50%; top: 0;
+    transform: translate(-50%, -100%) scale(.6); opacity: 0;
+    background: #fff; color: #111; font: 700 15px/1.3 "Segoe UI", Roboto, Arial, sans-serif;
+    padding: 8px 14px; border-radius: 14px; border: 3px solid #000;
+    white-space: nowrap; pointer-events: none; transition: .18s;
+    text-shadow: none;
+  }
+  .bubble::after {
+    content: ""; position: absolute; left: 50%; bottom: -12px; margin-left: -8px;
+    border: 8px solid transparent; border-top-color: #000;
+  }
+  .bubble.show { opacity: 1; transform: translate(-50%, -100%) scale(1); }
+
+  h1 { margin: 6px 0 0; font-size: clamp(22px, 5vw, 36px); line-height: 1.2; }
+  .sub { margin: 0; max-width: 560px; font-size: clamp(15px, 3.6vw, 18px); line-height: 1.55; color: #c9d3dd; }
+  .sus { color: #ff4d4d; font-weight: 700; }
+
+  .actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 22px 28px; margin-top: 18px; }
+  .emergency {
+    width: 132px; height: 132px; border-radius: 50%;
+    border: 8px solid #4a4f55;
+    background: radial-gradient(circle at 35% 30%, #ff7a7a, #d40000 45%, #730000);
+    color: #fff; font-size: 14px; line-height: 1.15; letter-spacing: .5px;
+    text-shadow: 0 2px 0 #000; cursor: pointer;
+    box-shadow: 0 8px 0 #22262a, 0 0 0 4px #000, 0 0 40px rgba(255,0,0,.35);
+    transition: transform .08s, box-shadow .08s;
+    animation: pulse 2.2s ease-in-out infinite;
+  }
+  .emergency:active { transform: translateY(6px); box-shadow: 0 2px 0 #22262a, 0 0 0 4px #000, 0 0 40px rgba(255,0,0,.5); }
+  .emergency:focus-visible, .task-btn:focus-visible { outline: 3px solid #fff; outline-offset: 6px; }
+  .task-btn {
+    padding: 14px 26px; border-radius: 999px; border: 3px solid #fff;
+    background: #13202b; color: #fff; font-weight: 800; font-size: 16px; cursor: pointer;
+    transition: background .15s, transform .1s;
+  }
+  .task-btn:hover { background: #1f3445; }
+  .task-btn:active { transform: scale(.97); }
+  .counter { margin: 8px 0 0; min-height: 1.3em; color: #ff8a8a; font-size: 14px; }
+  .hint { position: fixed; left: 16px; bottom: 14px; z-index: 1; margin: 0; font-size: 12px; color: rgba(255,255,255,.28); transition: opacity .5s; }
+  body.ejecting .hint { opacity: 0; }
+
+  /* ---------- eject scene ---------- */
+  #eject {
+    position: fixed; inset: 0; z-index: 30; overflow: hidden; cursor: pointer;
+    opacity: 0; pointer-events: none; transition: opacity .45s;
+  }
+  #eject.on { opacity: 1; pointer-events: auto; }
+  #flyer { position: absolute; left: 0; top: 34%; width: clamp(64px, 12vw, 120px); transform: translateX(-30vw); }
+  #flyer.go { animation: fly 6.5s linear forwards; }
+  #flyer svg { display: block; width: 100%; animation: spin 3.4s linear infinite; }
+  .eject-text { position: absolute; left: 16px; right: 16px; top: 58%; text-align: center; }
+  .eject-line { margin: 0; min-height: 1.4em; font-size: clamp(18px, 4.4vw, 34px); font-weight: 600; letter-spacing: .3px; }
+  .eject-line.small { margin-top: 10px; font-size: clamp(14px, 3.2vw, 22px); color: #c9d3dd; font-weight: 500; }
+  .skip-hint { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; font-size: 12px; color: rgba(255,255,255,.35); }
+
+  /* ---------- overlays ---------- */
+  .overlay {
+    position: fixed; inset: 0; z-index: 20;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+    padding: 16px; background: rgba(0,0,0,.68);
+  }
+  .flash {
+    position: fixed; inset: 0; z-index: 40; display: grid; place-items: center;
+    background: radial-gradient(circle, #c00000 0%, #3a0000 75%);
+    animation: flashbg .28s steps(2) infinite;
+  }
+  .flash h2 {
+    margin: 0 16px; text-align: center; line-height: 1;
+    font-size: clamp(38px, 10vw, 104px); font-style: italic;
+    -webkit-text-stroke: 3px #000; text-shadow: 6px 6px 0 #000;
+    transform: skew(-8deg); animation: shake .14s linear infinite;
+  }
+
+  .task-card { width: min(420px, 100%); background: #0f1720; border: 3px solid #fff; border-radius: 14px; padding: 20px; text-align: left; }
+  .task-title { font-size: 16px; margin-bottom: 14px; }
+  .task-bar { height: 24px; border: 3px solid #fff; background: #1d2a1f; border-radius: 4px; overflow: hidden; }
+  .task-bar i { display: block; height: 100%; width: 0; background: #43d64b; }
+  .task-meta { display: flex; justify-content: space-between; margin-top: 10px; font-size: 14px; color: #c9d3dd; }
+
+  .sabotage { background: transparent; text-align: center; }
+  body.alarm::after {
+    content: ""; position: fixed; inset: 0; z-index: 15; pointer-events: none;
+    box-shadow: inset 0 0 140px 50px rgba(255,0,0,.65);
+    background: rgba(255,0,0,.12);
+    animation: alarm 1s ease-in-out infinite;
+  }
+  .alarm-text { font-size: clamp(34px, 9vw, 72px); color: #ff3030; text-shadow: 0 0 20px rgba(255,0,0,.8), 3px 3px 0 #000; animation: blink 1s steps(2) infinite; }
+  .alarm-sub { font-size: clamp(17px, 4vw, 24px); }
+  .alarm-sub b { font-size: 1.4em; color: #ffd23f; }
+  .fix-btn {
+    min-width: 140px; padding: 14px 26px; border-radius: 12px; border: 4px solid #000;
+    background: #ffd23f; color: #000; font-size: 20px; cursor: pointer;
+    box-shadow: 0 6px 0 #8a6d00; z-index: 21;
+    transition: left .18s ease-out, top .18s ease-out;
+  }
+  .fix-btn:disabled { background: #43d64b; box-shadow: 0 6px 0 #1f7a24; cursor: default; }
+  .fix-msg { margin: 0; max-width: 460px; min-height: 2.6em; font-size: 16px; line-height: 1.4; }
+
+  .tablet {
+    width: min(680px, 100%); max-height: calc(100vh - 32px); max-height: calc(100svh - 32px); overflow: auto;
+    background: #aebfcc; color: #111; border: 5px solid #000; border-radius: 22px; padding: 16px;
+    box-shadow: 0 0 0 6px #4c5a66, 0 20px 60px rgba(0,0,0,.6);
+    animation: popin .35s cubic-bezier(.3,1.5,.5,1);
+  }
+  .tablet h2 { margin: 2px 0 14px; text-align: center; font-size: clamp(20px, 4.8vw, 30px); }
+  .vote-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .card {
+    position: relative; display: flex; align-items: center; gap: 10px; min-width: 0; min-height: 60px;
+    padding: 6px 10px; background: #d6e4ee; border: 3px solid #000; border-radius: 10px;
+    cursor: pointer; text-align: left; user-select: none;
+  }
+  .card:hover:not(.dead), .card:focus-visible { background: #eef6fb; outline: none; }
+  .card.selected { background: #fff; }
+  .card .mini { width: 34px; height: 40px; flex: none; }
+  .card .mini svg { width: 100%; height: 100%; display: block; }
+  .card .name { min-width: 0; font-weight: 800; font-size: clamp(12px, 3.4vw, 16px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card .name em { font-style: normal; font-weight: 600; font-size: .85em; opacity: .65; }
+  .card.dead { cursor: not-allowed; background: #9fb0bc; }
+  .card.dead .mini, .card.dead .name { opacity: .45; }
+  .card.dead::after { content: "✖"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 34px; color: #d00; line-height: 1; }
+  .confirm { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); display: none; gap: 4px; }
+  .card.selected .confirm { display: flex; }
+  .confirm button { width: 36px; height: 36px; border-radius: 8px; border: 3px solid #000; font-size: 16px; font-weight: 900; color: #fff; cursor: pointer; }
+  .confirm .yes { background: #2fbf3a; }
+  .confirm .no { background: #e53935; }
+  .votes { position: absolute; left: 54px; bottom: 3px; display: flex; flex-wrap: wrap; gap: 2px; }
+  .votes span, .skip-votes span { width: 14px; height: 16px; animation: pop .25s ease-out; }
+  .votes svg, .skip-votes svg { width: 100%; height: 100%; display: block; }
+  .meeting.voted .card { cursor: default; }
+  .tablet footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; font-weight: 700; }
+  .skip-wrap { display: flex; align-items: center; gap: 8px; }
+  .skip-votes { display: flex; gap: 2px; }
+  .skip-vote { padding: 8px 16px; border-radius: 10px; border: 3px solid #000; background: #fff; font-weight: 900; cursor: pointer; }
+  .skip-vote:hover { background: #eef6fb; }
+
+  /* ---------- vent ---------- */
+  .vent { position: fixed; right: 16px; bottom: 16px; z-index: 5; width: 72px; height: 112px; cursor: pointer; transition: opacity .4s; }
+  .vent-clip { position: absolute; left: 6px; right: 6px; bottom: 16px; height: 94px; overflow: hidden; }
+  .vent-bean { position: absolute; left: 50%; bottom: 0; width: 46px; transform: translate(-50%, 105%); transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
+  .vent-bean svg { display: block; width: 100%; }
+  .vent.peek .vent-bean { transform: translate(-50%, 6%); }
+  .vent-grill {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 22px; border-radius: 6px; border: 3px solid #111;
+    background: repeating-linear-gradient(90deg, #6a7480 0 6px, #2a2f35 6px 10px);
+    transition: transform .3s;
+  }
+  .vent.peek .vent-grill { transform: translateX(16px) rotate(10deg); }
+  .vent-bubble {
+    position: absolute; right: 100%; top: 18px; margin-right: 2px;
+    background: #fff; color: #000; font-weight: 900; padding: 4px 10px; border-radius: 12px; border: 3px solid #000;
+    opacity: 0; transform: scale(.6); transition: .2s; white-space: nowrap; pointer-events: none;
+  }
+  .vent.peek .vent-bubble { opacity: 1; transform: none; transition-delay: .25s; }
+
+  /* ---------- misc ---------- */
+  .mute {
+    position: fixed; top: 12px; right: 12px; z-index: 50; width: 42px; height: 42px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.4); background: rgba(0,0,0,.5); color: #fff; font-size: 18px; cursor: pointer;
+  }
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; z-index: 60; max-width: calc(100% - 32px);
+    transform: translate(-50%, calc(100% + 40px)); visibility: hidden;
+    transition: transform .3s cubic-bezier(.3,1.4,.5,1), visibility 0s .3s;
+    background: #fff; color: #111; font-weight: 700; padding: 12px 18px; border-radius: 12px; border: 3px solid #000;
+    box-shadow: 0 6px 0 rgba(0,0,0,.5); text-align: center;
+  }
+  .toast.show { transform: translate(-50%, 0); visibility: visible; transition-delay: 0s; }
+  .swarm-bean { position: fixed; left: 0; z-index: 25; pointer-events: none; }
+  .swarm-bean svg { display: block; width: 100%; }
+
+  @keyframes fly { from { transform: translate(-25vw, 0); } to { transform: translate(125vw, -8vh); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-.06em) rotate(6deg); } }
+  @keyframes hop { 0% { transform: scale(1, 1); } 40% { transform: scale(1.12, .88); } 100% { transform: scale(1, 1); } }
+  @keyframes shake { 0% { translate: 0 0; } 25% { translate: 2px -2px; } 50% { translate: -2px 2px; } 75% { translate: 2px 2px; } 100% { translate: 0 0; } }
+  @keyframes pulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.25); } }
+  @keyframes flashbg { 50% { filter: brightness(1.35); } }
+  @keyframes alarm { 50% { opacity: .35; } }
+  @keyframes blink { 50% { opacity: .25; } }
+  @keyframes popin { from { transform: scale(.8); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+
+  @media (max-width: 420px) {
+    .emergency { width: 116px; height: 116px; font-size: 12px; }
+    .vent { transform: scale(.85); transform-origin: bottom right; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .big-bean, .emergency, .flash, .flash h2, .alarm-text, body.alarm::after, .big-bean.impostor svg { animation: none !important; }
+    #flyer svg { animation-duration: 12s; }
+  }
+</style>
+</head>
+<body class="ejecting">
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<button id="mute" class="mute" aria-label="Bật/tắt âm thanh">🔊</button>
+
+<div id="eject" aria-live="polite">
+  <div id="flyer"></div>
+  <div class="eject-text">
+    <p id="ejectL1" class="eject-line"></p>
+    <p id="ejectL2" class="eject-line small"></p>
+  </div>
+  <span class="skip-hint">Bấm để bỏ qua</span>
+</div>
+
+<main id="main">
+  <div class="code404 heavy">
+    <span>4</span><button id="bigBean" class="big-bean" aria-label="Một crewmate trông rất sus"></button><span>4</span>
+    <div id="bubble" class="bubble" role="status"></div>
+  </div>
+  <h1 class="heavy">Trang này đã bị eject khỏi tàu.</h1>
+  <p class="sub">Nó <b>was not</b> The Impostor. Còn bạn thì đang đứng một mình ở một trang không tồn tại… <span class="sus">hơi sus đấy</span>.</p>
+  <div class="actions">
+    <button id="emergency" class="emergency heavy">EMERGENCY<br>MEETING</button>
+    <button id="home" class="task-btn">Về trang chủ</button>
+  </div>
+  <p id="counter" class="counter"></p>
+</main>
+<p class="hint">psst… thử gõ “sus” xem</p>
+
+<div id="flash" class="flash" hidden><h2 class="heavy">EMERGENCY<br>MEETING!</h2></div>
+
+<div id="task" class="overlay" hidden>
+  <div class="task-card">
+    <div class="task-title">Task: <b>Tải trang chủ</b></div>
+    <div class="task-bar"><i id="taskFill"></i></div>
+    <div class="task-meta"><span id="taskEta">Ước tính: 3 giây</span><b id="taskPct">0%</b></div>
+  </div>
+</div>
+
+<div id="sabotage" class="overlay sabotage" hidden>
+  <div class="alarm-text heavy">⚠ SABOTAGE ⚠</div>
+  <div class="alarm-sub">Reactor Meltdown trong <b id="meltdown">15</b>s</div>
+  <button id="fix" class="fix-btn heavy">FIX</button>
+  <p id="fixMsg" class="fix-msg" role="status"></p>
+</div>
+
+<div id="meeting" class="overlay meeting" hidden>
+  <div class="tablet" role="dialog" aria-modal="true" aria-labelledby="meetingTitle">
+    <h2 id="meetingTitle" class="heavy">Who Is The Impostor?</h2>
+    <div id="voteGrid" class="vote-grid"></div>
+    <footer>
+      <div class="skip-wrap">
+        <button id="skipVote" class="skip-vote">SKIP VOTE</button>
+        <div id="skipVotes" class="skip-votes"></div>
+      </div>
+      <span>Voting ends in: <b id="voteTimer">20</b>s</span>
+    </footer>
+  </div>
+</div>
+
+<div id="vent" class="vent" aria-hidden="true">
+  <div class="vent-clip"><div id="ventBean" class="vent-bean"></div></div>
+  <div class="vent-grill"></div>
+  <span class="vent-bubble">sus</span>
+</div>
+
+<div id="toast" class="toast" role="status"></div>
+
+<script>
+(() => {
+  'use strict';
+
+  const $ = (s) => document.querySelector(s);
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } },
+  };
+  const reducedMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- crewmate ---------- */
+  const COLORS = {
+    red: ['#c51111', '#7a0838'], blue: ['#132ed1', '#09158e'], green: ['#117f2d', '#0a4d2e'],
+    pink: ['#ed54ba', '#ab2bad'], orange: ['#ef7d0e', '#b33e15'], yellow: ['#f5f557', '#c38823'],
+    cyan: ['#38fedc', '#24a8be'], lime: ['#50ef39', '#15a742'], purple: ['#6b2fbb', '#3b177c'],
+    white: ['#d6e0f0', '#8394bf'], brown: ['#71491e', '#5e2615'], gray: ['#8a97a3', '#4d5a66'],
+  };
+  const COLOR_KEYS = Object.keys(COLORS);
+
+  function bean(color) {
+    const [main, dark] = COLORS[color] || COLORS.red;
+    return '<svg viewBox="0 0 100 116" aria-hidden="true"><g stroke="#000" stroke-width="5" stroke-linejoin="round">' +
+      '<rect x="8" y="42" width="22" height="44" rx="9" fill="' + dark + '"/>' +
+      '<path d="M24 40C24 14 38 4 56 4C76 4 88 18 88 40V96C88 105 83 110 75 110H67C62 110 60 106 60 100V92H52V100C52 106 49 110 44 110H33C27 110 24 105 24 98Z" fill="' + main + '"/>' +
+      '<rect x="46" y="20" width="48" height="28" rx="14" fill="#95cadc"/></g>' +
+      '<path d="M28 78C30 94 36 100 50 98" stroke="' + dark + '" stroke-width="7" fill="none" stroke-linecap="round" opacity=".55"/>' +
+      '<rect x="58" y="25" width="24" height="7" rx="3.5" fill="#fff" opacity=".75"/></svg>';
+  }
+
+  /* ---------- sound (WebAudio, no files) ---------- */
+  const sfx = (() => {
+    let ctx = null;
+    let unlocked = false;
+    let muted = store.get('sus-muted') === '1';
+    const unlock = () => { unlocked = true; };
+    addEventListener('pointerdown', unlock, true);
+    addEventListener('keydown', unlock, true);
+
+    function ac() {
+      if (muted || !unlocked) return null;
+      if (!ctx) {
+        const C = window.AudioContext || window.webkitAudioContext;
+        if (!C) return null;
+        ctx = new C();
+      }
+      if (ctx.state === 'suspended') ctx.resume();
+      return ctx;
+    }
+    function tone(freq, dur, opt = {}) {
+      const c = ac(); if (!c) return;
+      const t = c.currentTime + (opt.at || 0);
+      const o = c.createOscillator(); const g = c.createGain();
+      o.type = opt.type || 'square';
+      o.frequency.setValueAtTime(freq, t);
+      if (opt.slide) o.frequency.exponentialRampToValueAtTime(opt.slide, t + dur);
+      g.gain.setValueAtTime(opt.vol || 0.05, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g).connect(c.destination);
+      o.start(t); o.stop(t + dur + 0.02);
+    }
+    function noise(dur, vol, f1, f2) {
+      const c = ac(); if (!c) return;
+      const len = Math.floor(c.sampleRate * dur);
+      const buf = c.createBuffer(1, len, c.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+      const src = c.createBufferSource(); src.buffer = buf;
+      const f = c.createBiquadFilter(); f.type = 'bandpass'; f.Q.value = 1.2;
+      const g = c.createGain(); const t = c.currentTime;
+      f.frequency.setValueAtTime(f1, t); f.frequency.exponentialRampToValueAtTime(f2, t + dur);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t + dur * 0.3);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      src.connect(f).connect(g).connect(c.destination);
+      src.start(t); src.stop(t + dur);
+    }
+    return {
+      tick: () => tone(1100 + Math.random() * 300, 0.025, { vol: 0.015 }),
+      blip: () => tone(660, 0.08, { vol: 0.05 }),
+      vote: () => { tone(520, 0.06, { vol: 0.05 }); tone(780, 0.08, { vol: 0.05, at: 0.06 }); },
+      alarm: () => { for (let i = 0; i < 3; i++) { tone(880, 0.24, { at: i * 0.5, type: 'sawtooth', vol: 0.045 }); tone(587, 0.24, { at: i * 0.5 + 0.25, type: 'sawtooth', vol: 0.045 }); } },
+      siren: () => tone(420, 0.45, { type: 'sawtooth', slide: 840, vol: 0.035 }),
+      whoosh: () => noise(1.8, 0.18, 250, 3200),
+      boom: () => noise(1.2, 0.5, 900, 50),
+      peek: () => tone(300, 0.12, { type: 'triangle', slide: 700, vol: 0.06 }),
+      toggle() { muted = !muted; store.set('sus-muted', muted ? '1' : '0'); return muted; },
+      get muted() { return muted; },
+    };
+  })();
+
+  const muteBtn = $('#mute');
+  const syncMute = () => { muteBtn.textContent = sfx.muted ? '🔇' : '🔊'; };
+  syncMute();
+  muteBtn.addEventListener('click', () => { sfx.toggle(); syncMute(); sfx.blip(); });
+
+  /* ---------- starfield ---------- */
+  const cv = $('#stars');
+  const cx = cv.getContext('2d');
+  let W = 0, H = 0, stars = [], speed = 1;
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round((W * H) / 4500);
+    stars = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, z: Math.random() }));
+  }
+  resize();
+  addEventListener('resize', resize);
+  let last = performance.now();
+  function frame(now) {
+    const dt = Math.min(50, now - last) / 16.7; last = now;
+    const target = (document.body.classList.contains('ejecting') ? 4 : 1) * (reducedMotion ? 0.3 : 1);
+    speed += (target - speed) * 0.04;
+    cx.clearRect(0, 0, W, H);
+    cx.fillStyle = '#fff';
+    for (const s of stars) {
+      s.x -= (0.25 + s.z * 2) * speed * dt;
+      if (s.x < -2) { s.x = W + 2; s.y = Math.random() * H; }
+      const r = 0.5 + s.z * 1.4;
+      cx.globalAlpha = 0.25 + s.z * 0.75;
+      cx.fillRect(s.x, s.y, r, r);
+    }
+    cx.globalAlpha = 1;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  /* ---------- toast ---------- */
+  const toastEl = $('#toast');
+  let toastT;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastT);
+    toastT = setTimeout(() => toastEl.classList.remove('show'), 2600);
+  }
+
+  /* ---------- eject scene ---------- */
+  const ejectEl = $('#eject'), flyer = $('#flyer'), L1 = $('#ejectL1'), L2 = $('#ejectL2');
+  let typeGen = 0;
+  let skipEject = null;
+
+  function typeText(el, text, ms = 45) {
+    const my = typeGen;
+    return new Promise((res) => {
+      let i = 0;
+      el.textContent = '';
+      (function step() {
+        if (my !== typeGen) return res();
+        i++;
+        el.textContent = text.slice(0, i);
+        if (text[i - 1] !== ' ') sfx.tick();
+        if (i < text.length) setTimeout(step, ms); else res();
+      })();
+    });
+  }
+
+  function eject(color, line1, line2) {
+    return new Promise((resolve) => {
+      typeGen++;
+      L1.textContent = ''; L2.textContent = '';
+      flyer.innerHTML = color ? bean(color) : '';
+      flyer.classList.remove('go');
+      void flyer.offsetWidth;
+      if (color) { flyer.classList.add('go'); sfx.whoosh(); }
+      document.body.classList.add('ejecting');
+      ejectEl.classList.add('on');
+
+      const timers = [];
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true; typeGen++;
+        timers.forEach(clearTimeout);
+        skipEject = null;
+        ejectEl.classList.remove('on');
+        document.body.classList.remove('ejecting');
+        setTimeout(() => flyer.classList.remove('go'), 450);
+        resolve();
+      };
+      skipEject = finish;
+      timers.push(setTimeout(() => {
+        typeText(L1, line1).then(() => {
+          if (!done) timers.push(setTimeout(() => typeText(L2, line2), 450));
+        });
+      }, color ? 1200 : 500));
+      timers.push(setTimeout(finish, color ? 7200 : 5200));
+    });
+  }
+  ejectEl.addEventListener('click', () => { if (skipEject) skipEject(); });
+
+  /* ---------- state ---------- */
+  let busy = true;
+  const PAGE_COLOR = 'cyan';
+  const YOU_COLOR = pick(['pink', 'lime', 'yellow', 'orange']);
+
+  const counterEl = $('#counter');
+  function ejectCount() { return parseInt(store.get('sus-ejects') || '0', 10) || 0; }
+  function updateCounter() {
+    const n = ejectCount();
+    counterEl.textContent = n
+      ? 'Bạn đã bị eject ' + n + ' lần. ' + (n >= 3 ? 'Cả tàu không còn tin bạn nữa.' : 'Crew bắt đầu nghi rồi đó.')
+      : '';
+  }
+
+  /* ---------- big bean in the 404 ---------- */
+  const bigBean = $('#bigBean'), bubble = $('#bubble');
+  bigBean.innerHTML = bean('red');
+  const LINES = [
+    'Không phải tôi!',
+    'Tôi đang làm task mà…',
+    'Tôi thấy Admin vent đó.',
+    'Sao cứ bấm tôi hoài vậy?',
+    'Bấm nữa là tôi report đó.',
+    'Tôi có thể giải thích…',
+    '…',
+    'Ừ, là tôi đó. Giờ sao? 🔪',
+  ];
+  let beanClicks = 0, bubbleT, impostorT;
+  function say(text, ms = 1800) {
+    bubble.textContent = text;
+    bubble.classList.add('show');
+    clearTimeout(bubbleT);
+    bubbleT = setTimeout(() => bubble.classList.remove('show'), ms);
+  }
+  bigBean.addEventListener('click', () => {
+    const line = LINES[Math.min(beanClicks, LINES.length - 1)];
+    beanClicks++;
+    bigBean.classList.remove('hop'); void bigBean.offsetWidth; bigBean.classList.add('hop');
+    if (beanClicks >= LINES.length) {
+      say(line, 3200);
+      sfx.siren();
+      bigBean.classList.add('impostor');
+      clearTimeout(impostorT);
+      impostorT = setTimeout(() => { bigBean.classList.remove('impostor'); beanClicks = 0; }, 3200);
+    } else {
+      say(line);
+      sfx.blip();
+    }
+  });
+
+  /* ---------- emergency meeting ---------- */
+  const flash = $('#flash'), meeting = $('#meeting'), grid = $('#voteGrid');
+  const skipBtn = $('#skipVote'), skipVotes = $('#skipVotes'), voteTimer = $('#voteTimer');
+  const PLAYERS = [
+    { id: 'home', name: 'Trang chủ', color: 'red' },
+    { id: 'admin', name: 'Admin', color: 'blue' },
+    { id: 'server', name: 'Server', color: 'green' },
+    { id: 'db', name: 'Database', color: 'orange' },
+    { id: 'page', name: 'Trang bạn tìm', color: PAGE_COLOR, dead: true },
+    { id: 'bug', name: 'Con bug hôm qua', color: 'purple' },
+    { id: 'dev', name: 'Dev', color: 'white' },
+    { id: 'you', name: 'Bạn', color: YOU_COLOR, you: true },
+  ];
+  let voted = false, voteIv = null;
+
+  function renderMeeting() {
+    grid.innerHTML = '';
+    for (const p of PLAYERS) {
+      const card = document.createElement('div');
+      card.className = 'card' + (p.dead ? ' dead' : '') + (p.you ? ' you' : '');
+      card.dataset.id = p.id;
+      if (!p.dead) { card.tabIndex = 0; card.setAttribute('role', 'button'); card.setAttribute('aria-label', 'Vote ' + p.name); }
+      card.innerHTML =
+        '<span class="mini">' + bean(p.color) + '</span>' +
+        '<span class="name">' + p.name + (p.you ? ' <em>(là bạn)</em>' : '') + '</span>' +
+        '<span class="votes"></span>' +
+        (p.dead ? '' : '<span class="confirm"><button class="yes" aria-label="Xác nhận vote">✔</button><button class="no" aria-label="Huỷ">✖</button></span>');
+      grid.appendChild(card);
+    }
+  }
+
+  function addVote(target, color) {
+    const box = target === 'skip' ? skipVotes : grid.querySelector('.card[data-id="' + target + '"] .votes');
+    if (!box) return;
+    const s = document.createElement('span');
+    s.innerHTML = bean(color);
+    box.appendChild(s);
+    sfx.vote();
+  }
+
+  async function openMeeting() {
+    if (busy) return;
+    busy = true;
+    flash.hidden = false;
+    sfx.alarm();
+    await sleep(1700);
+    flash.hidden = true;
+
+    voted = false;
+    renderMeeting();
+    skipVotes.innerHTML = '';
+    meeting.classList.remove('voted');
+    meeting.hidden = false;
+    let t = 20;
+    voteTimer.textContent = t;
+    clearInterval(voteIv);
+    voteIv = setInterval(() => {
+      t--;
+      voteTimer.textContent = Math.max(0, t);
+      if (t <= 5 && t > 0) sfx.tick();
+      if (t <= 0) finishVote('timeout');
+    }, 1000);
+    const first = grid.querySelector('.card:not(.dead)');
+    if (first) first.focus({ preventScroll: true });
+  }
+
+  async function finishVote(choice) {
+    if (voted) return;
+    voted = true;
+    clearInterval(voteIv);
+    meeting.classList.add('voted');
+    grid.querySelectorAll('.selected').forEach((c) => c.classList.remove('selected'));
+    const you = PLAYERS.find((p) => p.you);
+    const others = PLAYERS.filter((p) => !p.dead && !p.you);
+
+    if (choice !== 'timeout') { addVote(choice, you.color); await sleep(600); }
+    for (const p of others) {
+      addVote(choice === 'timeout' ? 'skip' : 'you', p.color);
+      await sleep(230);
+    }
+    await sleep(1200);
+    meeting.hidden = true;
+
+    if (choice === 'timeout') {
+      await eject(null, 'No one was ejected. (Skipped)', 'Hết giờ. Impostor vẫn đang ở đây… 👀');
+    } else {
+      const target = PLAYERS.find((p) => p.id === choice);
+      let line2;
+      if (choice === 'you') line2 = 'Tự vote mình? Ít ra cũng thành thật. 0 Impostor remains.';
+      else if (choice === 'skip') line2 = 'Bạn skip. Cả tàu thì không. 0 Impostor remains.';
+      else line2 = 'Bạn vote ' + target.name + '. Cả tàu vote Bạn. 0 Impostor remains.';
+      store.set('sus-ejects', String(ejectCount() + 1));
+      await eject(you.color, 'Bạn was The Impostor.', line2);
+      updateCounter();
+    }
+    busy = false;
+  }
+
+  grid.addEventListener('click', (e) => {
+    if (voted) return;
+    const card = e.target.closest('.card');
+    if (!card) return;
+    if (card.classList.contains('dead')) { toast('Chết rồi, tha cho nó đi.'); return; }
+    if (e.target.closest('.no')) { card.classList.remove('selected'); return; }
+    if (e.target.closest('.yes')) { finishVote(card.dataset.id); return; }
+    grid.querySelectorAll('.selected').forEach((c) => c.classList.remove('selected'));
+    card.classList.add('selected');
+    sfx.blip();
+  });
+  grid.addEventListener('keydown', (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('card')) {
+      e.preventDefault();
+      e.target.click();
+    }
+  });
+  skipBtn.addEventListener('click', () => finishVote('skip'));
+  $('#emergency').addEventListener('click', openMeeting);
+
+  /* ---------- "về trang chủ" → task → sabotage ---------- */
+  const task = $('#task'), taskFill = $('#taskFill'), taskPct = $('#taskPct'), taskEta = $('#taskEta');
+  const sab = $('#sabotage'), meltEl = $('#meltdown'), fixBtn = $('#fix'), fixMsg = $('#fixMsg');
+  let dodges = 0, sabIv = null, sabDone = null;
+
+  async function goHome() {
+    if (busy) return;
+    busy = true;
+    task.hidden = false;
+    taskFill.style.width = '0%'; taskPct.textContent = '0%'; taskEta.textContent = 'Ước tính: 3 giây';
+    const start = performance.now(), D = 2600;
+    await new Promise((res) => {
+      (function step(now) {
+        const p = Math.min(1, (now - start) / D);
+        const v = Math.floor(99 * (1 - Math.pow(1 - p, 3)));
+        taskFill.style.width = v + '%';
+        taskPct.textContent = v + '%';
+        if (p < 1) requestAnimationFrame(step); else res();
+      })(start);
+    });
+    for (const s of ['Ước tính: 1 giây', 'Ước tính: 1 giây…', 'Ước tính: 3 phút', 'Ước tính: 47 năm']) {
+      taskEta.textContent = s;
+      await sleep(750);
+    }
+    task.hidden = true;
+
+    const result = await sabotage();
+    sab.hidden = true;
+    document.body.classList.remove('alarm');
+    if (result === 'boom') {
+      sfx.boom();
+      await eject('red', 'Reactor nổ rồi. Không ai sửa kịp.', 'Defeat. Impostor wins.');
+    }
+    busy = false;
+  }
+
+  function resetFix() {
+    dodges = 0;
+    fixBtn.disabled = false;
+    fixBtn.textContent = 'FIX';
+    fixBtn.style.position = ''; fixBtn.style.left = ''; fixBtn.style.top = '';
+    fixMsg.textContent = '';
+  }
+
+  function sabotage() {
+    resetFix();
+    sab.hidden = false;
+    document.body.classList.add('alarm');
+    let t = 15;
+    meltEl.textContent = t;
+    sfx.siren();
+    return new Promise((res) => {
+      sabDone = res;
+      clearInterval(sabIv);
+      sabIv = setInterval(() => {
+        t--;
+        meltEl.textContent = Math.max(0, t);
+        sfx.siren();
+        if (t <= 0) { clearInterval(sabIv); sabDone = null; res('boom'); }
+      }, 1000);
+    });
+  }
+
+  const DODGE_TEXT = ['FIX', 'Hụt!', 'Chậm quá', 'Gần rồi…', 'OK bấm đi'];
+  function dodge() {
+    dodges++;
+    const r = fixBtn.getBoundingClientRect();
+    const m = 16;
+    const x = rand(m, Math.max(m, innerWidth - r.width - m));
+    const y = rand(m + 60, Math.max(m + 60, innerHeight - r.height - m));
+    fixBtn.style.position = 'fixed';
+    fixBtn.style.left = x + 'px';
+    fixBtn.style.top = y + 'px';
+    fixBtn.textContent = DODGE_TEXT[dodges] || 'FIX';
+    sfx.blip();
+  }
+  fixBtn.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && dodges < 4) dodge(); });
+  fixBtn.addEventListener('click', async () => {
+    if (!sabDone) return;
+    if (dodges < 4) { dodge(); return; }
+    clearInterval(sabIv);
+    fixBtn.disabled = true;
+    fixBtn.textContent = 'ĐÃ FIX';
+    sfx.vote();
+    fixMsg.textContent = 'Sửa xong rồi! …Mà trang chủ chính là trang này. Bạn đang ở trang chủ rồi đó 🙃';
+    const done = sabDone; sabDone = null;
+    await sleep(3200);
+    done('fixed');
+  });
+  $('#home').addEventListener('click', goHome);
+
+  /* ---------- vent ---------- */
+  const vent = $('#vent'), ventBean = $('#ventBean');
+  function peek() {
+    if (vent.classList.contains('peek') || document.body.classList.contains('ejecting')) return;
+    ventBean.innerHTML = bean(pick(COLOR_KEYS));
+    vent.classList.add('peek');
+    sfx.peek();
+    setTimeout(() => vent.classList.remove('peek'), 1600);
+  }
+  vent.addEventListener('pointerenter', peek);
+  vent.addEventListener('click', peek);
+  (function autoPeek() {
+    setTimeout(() => { if (!document.hidden && !busy) peek(); autoPeek(); }, rand(12000, 25000));
+  })();
+
+  /* ---------- easter eggs ---------- */
+  function swarm() {
+    toast('ඞ SUS SUS SUS ඞ');
+    sfx.whoosh();
+    for (let i = 0; i < 26; i++) {
+      const el = document.createElement('div');
+      el.className = 'swarm-bean';
+      el.innerHTML = bean(pick(COLOR_KEYS));
+      el.style.width = rand(26, 72) + 'px';
+      el.style.top = rand(0, 88) + 'vh';
+      document.body.appendChild(el);
+      const anim = el.animate(
+        [{ transform: 'translateX(-15vw) rotate(0deg)' }, { transform: 'translateX(115vw) rotate(' + rand(-720, 720) + 'deg)' }],
+        { duration: rand(2400, 5200), delay: rand(0, 1400), easing: 'linear', fill: 'both' }
+      );
+      anim.onfinish = () => el.remove();
+    }
+  }
+
+  let keyBuf = '';
+  addEventListener('keydown', (e) => {
+    const mod = e.ctrlKey || e.metaKey;
+    if (e.key === 'F12' || (mod && e.shiftKey && /^[ijc]$/i.test(e.key)) || (mod && /^u$/i.test(e.key))) {
+      toast('Định vent vào DevTools à? Sus.');
+    }
+    if (e.key === 'Escape') {
+      if (skipEject) skipEject();
+      else if (!meeting.hidden) toast('Không trốn được cuộc họp đâu.');
+    }
+    if (e.key && e.key.length === 1 && !mod) {
+      keyBuf = (keyBuf + e.key.toLowerCase()).slice(-3);
+      if (keyBuf === 'sus') { keyBuf = ''; swarm(); }
+    }
+  });
+
+  addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    toast(pick([
+      '🚨 Dead body reported. Lý do: chuột phải.',
+      'Chuột phải để làm gì? Vent à?',
+      'Đã ghi nhận hành vi đáng ngờ. ඞ',
+    ]));
+  });
+
+  const baseTitle = document.title;
+  document.addEventListener('visibilitychange', () => {
+    document.title = document.hidden ? 'ඞ Đi đâu đó? Sus…' : baseTitle;
+  });
+
+  console.log('%cඞ', 'font-size:80px;color:#c51111');
+  console.log('%cMở console làm gì đó? Sus quá.', 'font-size:16px;font-weight:bold');
+
+  /* ---------- go ---------- */
+  updateCounter();
+  eject(PAGE_COLOR, 'Trang bạn tìm was not The Impostor.', '1 Impostor remains.').then(() => { busy = false; });
+})();
+</script>
+</body>
+</html>
